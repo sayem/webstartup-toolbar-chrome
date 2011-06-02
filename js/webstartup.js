@@ -1,8 +1,9 @@
 /*
 
-- class/id selectors
+- class/id selectors on html
+- then link with listeners and webstartup.init
+- also check when tabs moved from one to the other
 
-*/
 
 
       function windowLoaded() {
@@ -24,9 +25,76 @@ chrome.tabs.onCreated.addListener(function(tabId, changeInfo, tab) {
     alert('created');
 });
 
+*/
+
+
+/*
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+    alert('updated');
+});
+*/
+
+
+/*
+
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+      chrome.tabs.getSelected(null, function(tab) { alert(tab.url); });
+});
+
+chrome.tabs.getSelected(null, function(tab) {
+    myFunction(tab.url);
+});
+
+function myFunction(tablink) {
+    var url = tablink;
+    alert(url);
+};
+
+*/
+
+
+//chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) { alert('asshole'); });
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
+window.WebStartup = {
+    init: function () {
+//	WebStartup.wsdata = new Array();
+	WebStartup.ajaxrank();
+    },
+    getHost: function (url) {
+        var host = url.replace(/^https{0,1}:\/\//, '');
+        host = host.replace(/^www\./, '');
+        host = host.replace(/^www[a-z,0-9,A-Z]\./, '');
+        host = host.replace(/\/.*/,'');
+        return host;
+    },
+    ajaxrank: function () {
+	chrome.tabs.getSelected(null, function(tab) { WebStartup.currUrl = tab.url; });
+        WebStartup.orgurl = WebStartup.currUrl.split("/");
+        WebStartup.currUrl = WebStartup.getHost(WebStartup.currUrl);
+	alert(WebStartup.currUrl);
+    }
+}
+
+
+/*
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+
+    WebStartup.init();
+
+});
+*/
+
+
+
+
+
+
+
+/*
 
 window.WebStartup = {
     init: function () {
@@ -37,7 +105,7 @@ window.WebStartup = {
         var host = url.replace(/^https{0,1}:\/\//, '');
         host = host.replace(/^www\./, '');
         host = host.replace(/^www[a-z,0-9,A-Z]\./, '');
-        host = host.replace(/\/.*/,'');
+        host = host.replace(/\/.*/                            /*,'');
         return host;
     },
     StrToNum: function (Str, Check, Magic) {
@@ -636,3 +704,5 @@ window.WebStartup = {
         return false;
     }
 }
+
+*/
