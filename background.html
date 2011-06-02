@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <script>
+
+/*
+      var fetchFreq = 30000; // how often we fetch new tweets (30s)
+      var req; // request object
+      var unreadCount = 0; // how many unread tweets we have
+      var tweets; // all currently fetched tweets
+
+      getTweets();
+      setInterval(getTweets, fetchFreq);
+
+      // fetch timeline from server
+      function getTweets() {
+        req = new XMLHttpRequest();
+        req.open('GET', 'http://twitter.com/statuses/public_timeline.json');
+        req.onload = processTweets;
+        req.send();
+      }
+
+      // process new batch of tweets
+      function processTweets() {
+        var res = JSON.parse(req.responseText);
+        unreadCount += res.length;
+
+        if (unreadCount > 0) {
+          chrome.browserAction.setBadgeBackgroundColor({
+            color: [255, 0, 0, 255]
+          });
+          chrome.browserAction.setBadgeText({text: '' + unreadCount});
+        }
+
+        tweets = res.concat(tweets);
+      }
+*/
+
+    </script>
+  </head>
+</html>
