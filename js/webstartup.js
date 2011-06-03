@@ -1,9 +1,13 @@
 /*
 
-- class/id selectors on html
-- then link with listeners and webstartup.init
-- also check when tabs moved from one to the other
+- link options.html with localstorage code ---> then test out links to front-end with it
 
+
+- have all webstartup display/logic inserted as a script on popup.html and have all ajax set in background.html --- then just pull the ajax data from it, get data from background --- figure out first
+- then link with webstartup.js ---> link up selectors and listeners ---> rewire it so that all selectors are on popup, need to draw info from background
+- also check when tabs moved from one to the other
+- maybe takeout reload and settings
+- then format all css/graphics
 
 
       function windowLoaded() {
@@ -58,6 +62,11 @@ function myFunction(tablink) {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+//$(".ws_crunchbase").html(": n/a");
+
+
+
+
 
 window.WebStartup = {
     init: function () {
@@ -80,14 +89,15 @@ window.WebStartup = {
 }
 
 
+
 /*
+
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
-    WebStartup.init();
 
 });
-*/
 
+*/
 
 
 

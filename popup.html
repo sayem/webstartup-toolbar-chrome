@@ -7,7 +7,16 @@
   <body>
     <script type="text/javascript">
 
-      var bg = chrome.extension.getBackgroundPage();
+
+
+
+/*
+      $(document).ready(function(){
+        $(".ws_crunchbase").html(": crappppp");
+        $("#ws_crunchbase").attr("title", "cool");
+      });
+*/
+
 
 
 /*
@@ -16,43 +25,40 @@
 */
 
     </script>
+    <div id="webstartup">
 
 
 
+      <h1 id="crunchbase" class="ws-tab">
+	<div id="ws_crunchbase" title="CrunchBase: n/a"><img src="images/crunchbase.png" />CrunchBase: <a href="" class="ws_crunchbase"></a></div>
+      </h1>
 
-				<span id="ranks" class="ws-tab">
-					<span id="ws_pagerank" title="Google PageRank: n/a"><img src="images/google.png" /><span class="ws_pagerank"></span></span>
-					<span id="ws_alexa" title="Alexa Rank: n/a"><img src="images/alexa.ico" /><a href="" class="ws_alexa"></a></span>
-					<span class="divider"></span>
-				</span>
-				<span id="uniqs" class="ws-tab">
-					<span id="ws_compete" title="Compete, Monthly Uniques: n/a"><img src="images/compete.png" /><a href="" class="ws_compete"></a></span>
-					<span id="ws_quantcast" title="Quantcast, Monthly Uniques: n/a"><img src="images/quantcast.png" /><a href="" class="ws_quantcast"></a></span>
-					<span class="divider"></span>
-				</span>
-				<span id="backlinks" class="ws-tab">
-					<span id="ws_googlebl" title="Google Backlinks: n/a"><img src="images/google.png" /><a href="" class="ws_googlebl"></a></span>
-					<span id="ws_bingbl" title="Bing Backlinks: n/a"><img src="images/bing.ico" /><a href="" class="ws_bingbl"></a></span> 
-					<span id="ws_yahoobl" title="Yahoo Backlinks: n/a"><img src="images/yahoos.png" /><a href="" class="ws_yahoobl"></a></span> 
-					<span class="divider"></span>	
-				</span>
-				<span id="linkedin" class="ws-tab">
-					<span id="ws_linkedin" title="LinkedIn: n/a"><img src="images/linkedin.png" /><a href="" class="ws_linkedin"></a></span>
-					<span class="divider"></span>
-				</span>
-				<span id="crunchbase" class="ws-tab">
-					<span id="ws_crunchbase" title="CrunchBase: n/a"><img src="images/crunchbase.png" /><a href="" class="ws_crunchbase"></a></span>
-					<span class="divider"></span>
-				</span>
-				<span id="reload" class="ws-tab">
-					<span id="ws_reload_data" onclick="WebStartup.init()" title="Reload/Update the data of the Webstartup Toolbar"><image src="images/reload.png" /><span class="ws_reload">Reload</span></span>
-					<span class="divider"></span>
-				</span>
+
+      <h2 id="linkedin" class="ws-tab">
+	<div id="ws_linkedin" title="LinkedIn: n/a"><img src="images/linkedin.png" />LinkedIn: <a href="" class="ws_linkedin"></a></div>
+      </h2>
+
+
+      <h3 id="uniqs" class="ws-tab">
+	<div id="ws_compete" title="Compete, Monthly Uniques: n/a"><img src="images/compete.png" />Compete, Monthly Uniques: <a href="" class="ws_compete"></a></div>
+	<div id="ws_quantcast" title="Quantcast, Monthly Uniques: n/a"><img src="images/quantcast.png" />Quantcast, Monthly Uniques: <a href="" class="ws_quantcast"></a></div>
+      </h3>
+
+
+      <h4 id="ranks" class="ws-tab">
+	<div id="ws_pagerank" title="Google PageRank: n/a"><img src="images/google.png" />Google PageRank: <span class="ws_pagerank"></span></div>
+	<div id="ws_alexa" title="Alexa Rank: n/a"><img src="images/alexa.ico" />Alexa Rank: <a href="" class="ws_alexa"></a></div>
+      </h4>
+
+
+      <h5 id="backlinks" class="ws-tab">
+	<div id="ws_googlebl" title="Google Backlinks: n/a"><img src="images/google.png" />Google Backlinks: <a href="" class="ws_googlebl"></a></div>
+	<div id="ws_bingbl" title="Bing Backlinks: n/a"><img src="images/bing.ico" />Bing Backlinks: <a href="" class="ws_bingbl"></a></div>
+	<div id="ws_yahoobl" title="Yahoo Backlinks: n/a"><img src="images/yahoos.png" />Yahoo Backlinks: <a href="" class="ws_yahoobl"></a></div> 
+      </h5>
 
 
 
-
-
-
+  </div>
   </body>
 </html>

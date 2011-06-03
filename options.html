@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
+    <script type="text/javascript" src="js/jquery-1.6.1.min.js"></script>
+    <script type="text/javascript">    
+
+
+
+  $(function () {
+    for (i = 0; i < LEAGUES.length; i++) {
+      $('#leagues').append($('<option/>').val(LEAGUES[i]).text(LEAGUES[i]));
+    }
+    
+    if ($.inArray(localStorage.getItem('sports_scoreboard.default_league'), LEAGUES) != -1) {
+      $('#leagues').val(localStorage.getItem('sports_scoreboard.default_league'));
+    }
+		
+		if (localStorage.getItem('sports_scoreboard.localize') != 0) {
+			$('#localize').attr('checked', true);
+		}
+    
+    $('#save').click(function (event) {
+			localStorage.setItem('sports_scoreboard.default_league', $('#leagues').val());
+			if ($('#localize').attr('checked')) {
+				localStorage.setItem('sports_scoreboard.localize', 1);
+	  	} else {
+				localStorage.setItem('sports_scoreboard.localize', 0);
+			}
+			alert('Options saved!');
+    });
+  });
+
+
+
+
+
+    </script>
+  </head>
+  <body class="options">
+
+
+
+
+
+    <h1>Web Startup Toolbar Settings</h1>
+
+
+    <div id="company-details">
+
+      <div><img src="images/crunchbase.png" /><input type="checkbox" name="crunchbase" id="crunchbase" value="1" /><label for="crunchbase">CrunchBase</label></div>
+
+      <div><img src="images/linkedin.png" /><input type="checkbox" name="linkedin" id="linkedin" value="1" /><label for="linkedin">LinkedIn</label></div>
+
+    </div>
+
+
+
+    <div id="website-ranks">
+
+      <div><img src="images/google.png" /><input type="checkbox" name="pagerank" id="pagerank" value="1" /><label for="pagerank">PageRank</label></div>
+
+      <div><img src="images/alexa.ico" /><input type="checkbox" name="alexa" id="alexa" value="1" /><label for="alexa">Alexa</label></div>
+
+      <div><img src="images/quantcast.png" /><input type="checkbox" name="quantcast" id="quantcast" value="1" /><label for="quantcast">Quantcast</label></div>
+
+      <div><img src="images/compete.png" /><input type="checkbox" name="compete" id="compete" value="1" /><label for="compete">Compete</label></div>
+
+    </div>
+
+
+
+    <div id="backlinks">
+
+      <div><img src="images/google.png" /><input type="checkbox" name="googlebl" id="googlebl" value="1" /><label for="googlebl">Google</label></div>
+
+      <div><img src="images/bing.ico" /><input type="checkbox" name="bing" id="bing" value="1" /><label for="bing">Bing</label></div>
+
+      <div><img src="images/yahoo.png" /><input type="checkbox" name="yahoo" id="yahoo" value="1" /><label for="yahoo">Yahoo</label></div>
+
+    </div>
+
+    <input type="button" value="Save" id="save" />      
+
+
+
+
+
+  </body>
+</html>
