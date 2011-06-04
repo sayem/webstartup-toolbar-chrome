@@ -540,8 +540,18 @@ function crunchbase() {
 
 
 
+		var popups = chrome.extension.getViews({type: "popup"});
+		if (popups.length != 0) {
+		    var popup = popups[0];
 
-		alert(crunchbase);
+
+		    alert(popup.ws_crunchbase.innerHTML);
+
+
+		}
+
+
+
 
 
 
@@ -551,3 +561,15 @@ function crunchbase() {
         crunchbasexmlhttp.send(null);
     });
 }
+
+
+
+
+
+function start() {
+
+    alert(crunchbase());
+    
+
+}
+
