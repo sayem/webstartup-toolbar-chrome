@@ -1,52 +1,29 @@
-/*
 
-- have all webstartup display/logic inserted as a script on popup.html and have all ajax set in background.html --- then just pull the ajax data from it, get data from background --- figure out first
+bg = chrome.extension.getBackgroundPage();
 
+bg.crunchbase();
 
-- then link with webstartup.js ---> link up selectors and listeners ---> rewire it so that all selectors are on popup, need to draw info from background
-- also check when tabs moved from one to the other
-- maybe takeout reload and settings
-- then format all css/graphics
-
-
-/*
-      chrome.tabs.getSelected(null, function(tab) { alert(tab.url); });
-      chrome.tabs.create({'url': 'http://sayemislam.com' });
-*/
 
 
 /*
 
-      function windowLoaded() {
-
-      alert('whatttupppppppp');
-	  
-      }
-
-      window.addEventListener("load", windowLoaded, false);
+- call all funcs in webstartup.js and link to ids/classes on popup
+- acct for prefs ---> check localstorage and see if it's present or not, if not then then don't call the func from bg
+- then format all css/graphics ----> cool borders/background and also highlighting while hovered over, and links
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-    alert('updated');
-});
 
+- http://stackoverflow.com/questions/5306888/chrome-extension-popup-and-background-ajax
+- http://stackoverflow.com/questions/2149917/chrome-extensions-how-to-know-when-a-tab-has-finished-loading-from-the-bg-page so that it doesnt load 2x
+
+chrome.tabs.getSelected(null, function(tab) { alert(tab.url); });
+chrome.tabs.create({'url': 'http://sayemislam.com' });
 
 chrome.tabs.onCreated.addListener(function(tabId, changeInfo, tab) {         
     alert('created');
 });
-
-*/
-
-
-/*
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-    alert('updated');
-});
-*/
-
-
-/*
 
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
       chrome.tabs.getSelected(null, function(tab) { alert(tab.url); });
@@ -64,50 +41,6 @@ function myFunction(tablink) {
 */
 
 
-//chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) { alert('asshole'); });
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-//$(".ws_crunchbase").html(": n/a");
-
-
-
-
-
-window.WebStartup = {
-    init: function () {
-//	WebStartup.wsdata = new Array();
-	WebStartup.ajaxrank();
-    },
-    getHost: function (url) {
-        var host = url.replace(/^https{0,1}:\/\//, '');
-        host = host.replace(/^www\./, '');
-        host = host.replace(/^www[a-z,0-9,A-Z]\./, '');
-        host = host.replace(/\/.*/,'');
-        return host;
-    },
-    ajaxrank: function () {
-	chrome.tabs.getSelected(null, function(tab) { WebStartup.currUrl = tab.url; });
-        WebStartup.orgurl = WebStartup.currUrl.split("/");
-        WebStartup.currUrl = WebStartup.getHost(WebStartup.currUrl);
-	alert(WebStartup.currUrl);
-    }
-}
-
-
-
-/*
-
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-
-
-});
-
-*/
-
-
-
 
 
 
@@ -115,14 +48,15 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
 window.WebStartup = {
     init: function () {
-		WebStartup.wsdata = new Array();
-		WebStartup.ajaxrank();			
+	WebStartup.wsdata = new Array();
+	WebStartup.bg = chrome.extension.getBackgroundPage();
+	WebStartup.ajaxrank();			
     },
     getHost: function (url) {
         var host = url.replace(/^https{0,1}:\/\//, '');
         host = host.replace(/^www\./, '');
         host = host.replace(/^www[a-z,0-9,A-Z]\./, '');
-        host = host.replace(/\/.*/                            /*,'');
+        host = host.replace(/\/.*/                                      /*,'');
         return host;
     },
     StrToNum: function (Str, Check, Magic) {
@@ -190,13 +124,13 @@ window.WebStartup = {
         return x1 + x2;
     },
     ajaxrank: function () {
-        WebStartup.currUrl = safari.application.activeBrowserWindow.activeTab.url;     //
+	chrome.tabs.getSelected(null, function(tab) { WebStartup.currUrl = tab.url; });
         WebStartup.orgurl = WebStartup.currUrl.split("/");
         WebStartup.currUrl = WebStartup.getHost(WebStartup.currUrl);
         if (WebStartup.orgurl.length > 2) {
             if (WebStartup.wsdata[WebStartup.currUrl]) {
                 var currTime = new Date().getTime();
-				WebStartup.updateTime = updateTime;
+		WebStartup.updateTime = updateTime;
                 if (currTime - WebStartup.wsdata[WebStartup.currUrl]["time"] > WebStartup.updateTime) delete(WebStartup.wsdata[WebStartup.currUrl]);
             }
             if (WebStartup.wsdata[WebStartup.currUrl] && WebStartup.lastURL != WebStartup.currUrl) {
@@ -205,7 +139,7 @@ window.WebStartup = {
                 if (WebStartup.wsdata[WebStartup.currUrl]["pr"] == ': n/a' && !($('#ws_pagerank').is(':hidden'))) {	
                     $(".ws_pagerank").html(": n/a");
                     $("#ws_pagerank").attr("title", "Google Pagerank: n/a");					
-                    if (WebStartup.prxmlhttp) WebStartup.prxmlhttp.abort();
+                    if (WebStartup.prxmlhttp) WebStartup.prxmlhttp.abort();               // link to bg
                     WebStartup.googleRank();
                 }
                 if (WebStartup.wsdata[WebStartup.currUrl]["alexa"] == ': n/a' && !($('#ws_alexa').is(':hidden'))) {
@@ -293,7 +227,7 @@ window.WebStartup = {
     resetData: function () {
         $(".ws_pagerank").html(": n/a");
         $("#ws_pagerank").attr("title", "Google Pagerank: n/a");		
-        if (WebStartup.prxmlhttp && WebStartup.prxmlhttp.readyState != 4) {
+        if (WebStartup.prxmlhttp && WebStartup.prxmlhttp.readyState != 4) {             // link to bg
             WebStartup.prxmlhttp.abort();
             delete(WebStartup.prxmlhttp);
             WebStartup.wsdata[WebStartup.currUrl]["pr"] = ': n/a';
@@ -377,7 +311,16 @@ window.WebStartup = {
     },
     googleRank: function () {
         WebStartup.workingURL = 'http://toolbarqueries.google.com/search?client=navclient-auto&ch=' + WebStartup.CheckHash(WebStartup.HashURL(WebStartup.currUrl)) + '&features=Rank&q=info:' + encodeURIComponent(WebStartup.currUrl) + '&num=100&filter=0';
-        WebStartup.prxmlhttp = WebStartup.getXmlHttpObject();
+
+
+
+
+
+
+
+
+
+        WebStartup.prxmlhttp = WebStartup.getXmlHttpObject();                                    // LINK TO BG
         WebStartup.prxmlhttp.onreadystatechange = function () {
             if (WebStartup.prxmlhttp.readyState == 4 && WebStartup.prxmlhttp.status == 200) {
                 var rt = WebStartup.prxmlhttp.responseText;
@@ -408,10 +351,10 @@ window.WebStartup = {
                     if (WebStartup.isInt(rt.substr(start + 6, end - start - 7))) alexa = WebStartup.addCommas(rt.substr(start + 6, end - start - 7));
                     else alexa = 'n/a';
                 }
-				$("#ws_alexa").attr("title", 'Alexa Rank: ' + alexa);
+		$("#ws_alexa").attr("title", 'Alexa Rank: ' + alexa);
                 $(".ws_alexa").html(': ' + alexa);
-				$(".ws_alexa").attr("href", 'http://www.alexa.com/siteinfo/' + WebStartup.lastURL);
-				$(".ws_alexa").click(function(){ safari.self.browserWindow.openTab().url = this.attr("href"); });    //
+		$(".ws_alexa").attr("href", 'http://www.alexa.com/siteinfo/' + WebStartup.lastURL);
+		$(".ws_alexa").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
                 WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["alexa"] = alexa;
             }
         };
@@ -440,8 +383,8 @@ window.WebStartup = {
 				else compete = count;
 				$("#ws_compete").attr("title", 'Compete, Monthly Uniques: ' + compete);
                 $(".ws_compete").html(': ' + compete);
-				$(".ws_compete").attr("href", 'http://siteanalytics.compete.com/' + WebStartup.lastURL);
-				$(".ws_compete").click(function(){ safari.self.browserWindow.openTab().url = this.attr("href"); });
+		$(".ws_compete").attr("href", 'http://siteanalytics.compete.com/' + WebStartup.lastURL);
+		$(".ws_compete").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
                 WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["compete"] = compete;
             }
         };		
@@ -475,10 +418,10 @@ window.WebStartup = {
 			    quantcast = rt.substr(global + 8, end - global - 8).replace(/^\s+|\s+$/g,"");
 		}      
 		else quantcast = "n/a";
-		        $("#ws_quantcast").attr("title", 'Quantcast, Monthly Uniques: ' + quantcast);
+		$("#ws_quantcast").attr("title", 'Quantcast, Monthly Uniques: ' + quantcast);
                 $(".ws_quantcast").html(': ' + quantcast);
-				$(".ws_quantcast").attr("href", 'http://www.quantcast.com/' + WebStartup.lastURL);
-				$(".ws_quantcast").click(function(){ safari.self.browserWindow.openTab().url = this.attr("href"); });	
+		$(".ws_quantcast").attr("href", 'http://www.quantcast.com/' + WebStartup.lastURL);
+		$(".ws_quantcast").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
                 WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["quantcast"] = quantcast;
             }
         };
@@ -510,10 +453,10 @@ window.WebStartup = {
                     if (WebStartup.isInt(rt.substr(start + c, end - start - c))) googlebl = rt.substr(start + c, end - start - c);
                     else googlebl = 'n/a';
                 }
-				$("#ws_googlebl").attr("title", 'Google Backlinks: ' + googlebl);
+		$("#ws_googlebl").attr("title", 'Google Backlinks: ' + googlebl);
                 $(".ws_googlebl").html(': ' + googlebl);
-				$(".ws_googlebl").attr("href", 'http://www.google.com/search?hl=en&filter=0&lr=&ie=UTF-8&q=link:' + WebStartup.lastURL + '&filter=0');
-				$(".ws_googlebl").click(function(){ safari.self.browserWindow.openTab().url = this.attr("href"); });	
+		$(".ws_googlebl").attr("href", 'http://www.google.com/search?hl=en&filter=0&lr=&ie=UTF-8&q=link:' + WebStartup.lastURL + '&filter=0');
+		$(".ws_googlebl").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
                 WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["googlebl"] = googlebl;
             }
         };
@@ -534,10 +477,10 @@ window.WebStartup = {
                     if (WebStartup.isInt(rt.substr(start + 3, end - start - 3))) bingbl = rt.substr(start + 3, end - start - 3);
                     else bingbl = 'n/a';
                 }
-				$("#ws_bingbl").attr("title", 'Bing Backlinks: ' + bingbl);
+		$("#ws_bingbl").attr("title", 'Bing Backlinks: ' + bingbl);
                 $(".ws_bingbl").html(': ' + bingbl);
-				$(".ws_bingbl").attr("href", 'http://www.bing.com/search?q=inbody:' + WebStartup.lastURL + '+-site:' + WebStartup.lastURL);
-				$(".ws_bingbl").click(function(){ safari.self.browserWindow.openTab().url = this.attr("href"); });			
+		$(".ws_bingbl").attr("href", 'http://www.bing.com/search?q=inbody:' + WebStartup.lastURL + '+-site:' + WebStartup.lastURL);
+		$(".ws_bingbl").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
                 WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["bingbl"] = bingbl;
             }
         };
@@ -558,10 +501,10 @@ window.WebStartup = {
                     if (WebStartup.isInt(rt.substr(start + 9, end - start - 9))) yahooind = rt.substr(start + 9, end - start - 9);
                     else yahooind = 'n/a';
                 }
-				$("#ws_yahoobl").attr("title", 'Yahoo Backlinks: ' + yahooind);
+		$("#ws_yahoobl").attr("title", 'Yahoo Backlinks: ' + yahooind);
                 $(".ws_yahoobl").html(': ' + yahooind);
-				$(".ws_yahoobl").attr("href", 'http://siteexplorer.search.yahoo.com/siteexplorer/search?bwm=i&bwmo=d&bwmf=u&p=' + WebStartup.lastURL);
-				$(".ws_yahoobl").click(function(){ safari.self.browserWindow.openTab().url = this.attr("href"); });							
+		$(".ws_yahoobl").attr("href", 'http://siteexplorer.search.yahoo.com/siteexplorer/search?bwm=i&bwmo=d&bwmf=u&p=' + WebStartup.lastURL);
+		$(".ws_yahoobl").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
                 WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["yahoobl"] = yahooind;
             }
         };
@@ -590,14 +533,14 @@ window.WebStartup = {
 			    linkedin = rt.substr(start + 11, end - start - 11) + ' employees';
 		    }
 		}
-		        $("#ws_linkedin").attr("title", 'LinkedIn: ' + linkedin);
+		$("#ws_linkedin").attr("title", 'LinkedIn: ' + linkedin);
                 $(".ws_linkedin").html(': ' + linkedin);
-				if (WebStartup.lastURL.split('.')[1] in {'com':'', 'net':'', 'org':'', 'gov':'', 'edu':''})
-					var linkedin_url = 'http://www.linkedin.com/company/' + WebStartup.lastURL.split('.')[0];
-				else
-					var linkedin_url = 'http://www.linkedin.com/company/' + WebStartup.lastURL;
-				$(".ws_linkedin").attr("href", linkedin_url);
-				$(".ws_linkedin").click(function(){ safari.self.browserWindow.openTab().url = this.attr("href"); });
+		if (WebStartup.lastURL.split('.')[1] in {'com':'', 'net':'', 'org':'', 'gov':'', 'edu':''})
+		    var linkedin_url = 'http://www.linkedin.com/company/' + WebStartup.lastURL.split('.')[0];
+		else
+		    var linkedin_url = 'http://www.linkedin.com/company/' + WebStartup.lastURL;
+		$(".ws_linkedin").attr("href", linkedin_url);
+		$(".ws_linkedin").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
                 WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["linkedin"] = linkedin;
             }
 	};
@@ -698,14 +641,14 @@ window.WebStartup = {
 		if (funding && round) var slash = '  /  ';
 		else slash = ' ';
 		crunchbase = founded + comma + acquiredby + date + price + ipo + ipodate + funding + slash + round;
-		        $("#ws_crunchbase").attr("title", 'CrunchBase: ' + crunchbase);
+		$("#ws_crunchbase").attr("title", 'CrunchBase: ' + crunchbase);
                 $(".ws_crunchbase").html(': ' + crunchbase);
-				if (WebStartup.lastURL.split('.')[1] in {'com':'', 'net':'', 'org':'', 'gov':'', 'edu':''}) 
-					var crunchbase_url = 'http://www.crunchbase.com/company/' + WebStartup.lastURL.split('.')[0];
-				else 
-					var crunchbase_url = 'http://www.crunchbase.com/company/' + WebStartup.lastURL.split('.')[0] + '-' + WebStartup.lastURL.split('.')[1];
-				$(".ws_crunchbase").attr("href", crunchbase_url);
-				$(".ws_crunchbase").click(function(){ safari.self.browserWindow.openTab().url = this.attr("href"); });
+		if (WebStartup.lastURL.split('.')[1] in {'com':'', 'net':'', 'org':'', 'gov':'', 'edu':''}) 
+		    var crunchbase_url = 'http://www.crunchbase.com/company/' + WebStartup.lastURL.split('.')[0];
+		else 
+		    var crunchbase_url = 'http://www.crunchbase.com/company/' + WebStartup.lastURL.split('.')[0] + '-' + WebStartup.lastURL.split('.')[1];
+		$(".ws_crunchbase").attr("href", crunchbase_url);
+		$(".ws_crunchbase").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
                 WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["crunchbase"] = crunchbase;
             }
         };
