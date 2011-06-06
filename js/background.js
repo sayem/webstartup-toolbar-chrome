@@ -86,7 +86,7 @@ function isInt(num) {
 	return false;
 }
 
-//////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 
 
 function pr() {
@@ -101,17 +101,12 @@ function pr() {
                 pr = pr.substr(0, pr.length - 1);
                 if (isInt(pr)) pr = pr + '/10';
                 else pr = 'n/a';
-
-/*
-                $(".ws_pagerank").html(': ' + pr);
-                $("#ws_pagerank").attr("title", 'Google Pagerank: ' + pr);
-                WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["pr"] = pr;
-*/
-
-
-		alert(pr);
-
-
+		var popups = chrome.extension.getViews({type: "popup"});
+		if (popups.length != 0) {
+		    var popup = popups[0];
+		    popup.ws_pagerank.setAttribute("title", 'Google PageRank: ' + pr);
+		    popup.ws_pagerank.childNodes[2].insertAdjacentHTML("beforeEnd", 'Google PageRank: ' + pr);
+		}
             }
         };
         prxmlhttp.open("GET", workingURL, true);
@@ -136,20 +131,13 @@ function alexa() {
                     if (isInt(rt.substr(start + 6, end - start - 7))) alexa = addCommas(rt.substr(start + 6, end - start - 7));
                     else alexa = 'n/a';
 		}
-
-
-/*
-		$("#ws_alexa").attr("title", 'Alexa Rank: ' + alexa);
-		$(".ws_alexa").html(': ' + alexa);
-		$(".ws_alexa").attr("href", 'http://www.alexa.com/siteinfo/' + WebStartup.lastURL);
-		$(".ws_alexa").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
-		WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["alexa"] = alexa;
-*/
-
-
-		alert(alexa);
-
-
+		var popups = chrome.extension.getViews({type: "popup"});
+		if (popups.length != 0) {
+		    var popup = popups[0];
+		    popup.ws_alexa.setAttribute("title", 'Alexa Rank: ' + alexa);
+		    popup.ws_alexa.childNodes[2].setAttribute('href', 'http://alexa.com/siteinfo/' + currUrl);
+		    popup.ws_alexa.childNodes[2].insertAdjacentHTML("beforeEnd", 'Alexa Rank: ' + alexa);
+		}
             }
 	};
 	alexaxmlhttp.open("GET", workingURL, true);
@@ -179,21 +167,13 @@ function compete() {
 		    else compete = 'n/a';
 		}
 		else compete = count;
-
-
-		/*
-		  $("#ws_compete").attr("title", 'Compete, Monthly Uniques: ' + compete);
-		  $(".ws_compete").html(': ' + compete);
-		  $(".ws_compete").attr("href", 'http://siteanalytics.compete.com/' + WebStartup.lastURL);
-		  $(".ws_compete").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
-		  WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["compete"] = compete;
-		*/
-
-
-
-		alert(compete);
-
-
+		var popups = chrome.extension.getViews({type: "popup"});
+		if (popups.length != 0) {
+		    var popup = popups[0];
+		    popup.ws_compete.setAttribute("title", 'Compete, Monthly Uniques: ' + compete);
+		    popup.ws_compete.childNodes[2].setAttribute('href', 'http://siteanalytics.compete.com/' + currUrl);
+		    popup.ws_compete.childNodes[2].insertAdjacentHTML("beforeEnd", 'Compete, Monthly Uniques: ' + compete);
+		}
             }
 	};
 	competexmlhttp.open("GET", workingURL, true);
@@ -230,21 +210,13 @@ function quantcast() {
 			    quantcast = rt.substr(global + 8, end - global - 8).replace(/^\s+|\s+$/g,"");
 		}      
 		else quantcast = "n/a";
-
-
-
-/*
-		$("#ws_quantcast").attr("title", 'Quantcast, Monthly Uniques: ' + quantcast);
-		$(".ws_quantcast").html(': ' + quantcast);
-		$(".ws_quantcast").attr("href", 'http://www.quantcast.com/' + WebStartup.lastURL);
-		$(".ws_quantcast").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
-		WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["quantcast"] = quantcast;
-*/
-
-
-		alert(quantcast);
-
-
+		var popups = chrome.extension.getViews({type: "popup"});
+		if (popups.length != 0) {
+		    var popup = popups[0];
+		    popup.ws_quantcast.setAttribute("title", 'Quantcast, Monthly Uniques: ' + quantcast);
+		    popup.ws_quantcast.childNodes[2].setAttribute('href', 'http://quantcast.com/' + currUrl);
+		    popup.ws_quantcast.childNodes[2].insertAdjacentHTML("beforeEnd", 'Quantcast, Monthly Uniques: ' + quantcast);
+		}
             }
 	};
 	qcxmlhttp.open("GET", workingURL, true);
@@ -279,22 +251,13 @@ function googlebl() {
                     if (isInt(rt.substr(start + c, end - start - c))) googlebl = rt.substr(start + c, end - start - c);
                     else googlebl = 'n/a';
                 }
-
-
-
-/*
-		$("#ws_googlebl").attr("title", 'Google Backlinks: ' + googlebl);
-                $(".ws_googlebl").html(': ' + googlebl);
-		$(".ws_googlebl").attr("href", 'http://www.google.com/search?hl=en&filter=0&lr=&ie=UTF-8&q=link:' + WebStartup.lastURL + '&filter=0');
-		$(".ws_googlebl").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
-                WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["googlebl"] = googlebl;
-*/
-
-
-
-		alert(googlebl);
-
-
+		var popups = chrome.extension.getViews({type: "popup"});
+		if (popups.length != 0) {
+		    var popup = popups[0];
+		    popup.ws_googlebl.setAttribute("title", 'Google Backlinks: ' + googlebl);
+		    popup.ws_googlebl.childNodes[2].setAttribute('href', 'http://google.com/search?hl=en&filter=0&lr=&ie=UTF-8&q=link:' + currUrl + '&filter=0');
+		    popup.ws_googlebl.childNodes[2].insertAdjacentHTML("beforeEnd", "Google Backlinks: " + googlebl);
+		}
             }
         };
         googleblxmlhttp.open("GET", workingURL, true);
@@ -318,22 +281,13 @@ function bingbl() {
                     if (isInt(rt.substr(start + 3, end - start - 3))) bingbl = rt.substr(start + 3, end - start - 3);
                     else bingbl = 'n/a';
                 }
-
-
-
-/*
-		$("#ws_bingbl").attr("title", 'Bing Backlinks: ' + bingbl);
-                $(".ws_bingbl").html(': ' + bingbl);
-		$(".ws_bingbl").attr("href", 'http://www.bing.com/search?q=inbody:' + WebStartup.lastURL + '+-site:' + WebStartup.lastURL);
-		$(".ws_bingbl").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
-                WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["bingbl"] = bingbl;
-*/
-
-
-		alert(bingbl);
-
-
-
+		var popups = chrome.extension.getViews({type: "popup"});
+		if (popups.length != 0) {
+		    var popup = popups[0];
+		    popup.ws_bingbl.setAttribute("title", 'Bing Backlinks: ' + bingbl);
+		    popup.ws_bingbl.childNodes[2].setAttribute('href', 'http://bing.com/search?q=inbody:' + currUrl + '+-site:' + currUrl);
+		    popup.ws_bingbl.childNodes[2].insertAdjacentHTML("beforeEnd", "Bing Backlinks: " + bingbl);
+		}
             }
         };
         bingblxmlhttp.open("GET", workingURL, true);
@@ -357,20 +311,13 @@ function yahoobl() {
                     if (isInt(rt.substr(start + 9, end - start - 9))) yahooind = rt.substr(start + 9, end - start - 9);
                     else yahooind = 'n/a';
                 }
-
-
-/*
-		$("#ws_yahoobl").attr("title", 'Yahoo Backlinks: ' + yahooind);
-                $(".ws_yahoobl").html(': ' + yahooind);
-		$(".ws_yahoobl").attr("href", 'http://siteexplorer.search.yahoo.com/siteexplorer/search?bwm=i&bwmo=d&bwmf=u&p=' + WebStartup.lastURL);
-		$(".ws_yahoobl").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
-                WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["yahoobl"] = yahooind;
-*/
-
-
-		alert(yahooind);
-
-
+		var popups = chrome.extension.getViews({type: "popup"});
+		if (popups.length != 0) {
+		    var popup = popups[0];
+		    popup.ws_yahoobl.setAttribute("title", 'Yahoo Backlinks: ' + yahooind);
+		    popup.ws_yahoobl.childNodes[2].setAttribute('href', 'http://siteexplorer.search.yahoo.com/siteexplorer/search?bwm=i&bwmo=d&bwmf=u&p=' + currUrl);
+		    popup.ws_yahoobl.childNodes[2].insertAdjacentHTML("beforeEnd", "Yahoo Backlinks: " + yahooind);
+		}
             }
         };
         yahooxmlhttp.open("GET", workingURL, true);
@@ -384,7 +331,7 @@ function linkedin() {
 	var tld = currUrl.split('.')[1];
 	var company = currUrl;
 	if (tld in {'com':'', 'net':'', 'org':'', 'gov':'', 'edu':''}) company = currUrl.split('.')[0];
-        workingURL = 'http://www.linkedin.com/company/' + encodeURIComponent(company);
+        workingURL = 'http://linkedin.com/company/' + encodeURIComponent(company);
         linkedinxmlhttp = getXmlHttpObject();
         linkedinxmlhttp.onreadystatechange = function () {
             if (linkedinxmlhttp.readyState == 4 && linkedinxmlhttp.status == 200) {
@@ -402,39 +349,19 @@ function linkedin() {
 			    linkedin = rt.substr(start + 11, end - start - 11) + ' employees';
 		    }
 		}
-
-
-
 		var popups = chrome.extension.getViews({type: "popup"});
 		if (popups.length != 0) {
 		    var popup = popups[0];
-		    popup.ws_crunchbase.setAttribute("title", 'CrunchBase: ' + crunchbase);
-
+		    popup.ws_linkedin.setAttribute('title', 'LinkedIn: ' + linkedin);
 		    if (currUrl.split('.')[1] in {'com':'', 'net':'', 'org':'', 'gov':'', 'edu':''}) {
-			popup.ws_crunchbase.childNodes[2].setAttribute('href', 'http://crunchbase.com/company/' + currUrl.split('.')[0]);
-			popup.ws_crunchbase.childNodes[2].insertAdjacentHTML("beforeEnd", "CrunchBase: " + crunchbase);
+			popup.ws_linkedin.childNodes[2].setAttribute('href', 'http://linkedin.com/company/' + currUrl.split('.')[0]);
+			popup.ws_linkedin.childNodes[2].insertAdjacentHTML('beforeEnd', 'LinkedIn: ' + linkedin);
 		    }
 		    else {
-			popup.ws_crunchbase.childNodes[2].setAttribute('href', "http://crunchbase.com/company/" + currUrl.split('.')[0] + "-" + currUrl.lastURL.split('.')[1]);
-			popup.ws_crunchbase.childNodes[2].insertAdjacentHTML("beforeEnd", "CrunchBase: " + crunchbase);
+			popup.ws_linkedin.childNodes[2].setAttribute('href', "http://linkedin.com/company/" + currUrl);
+			popup.ws_linkedin.childNodes[2].insertAdjacentHTML('beforeEnd', 'LinkedIn: ' + linkedin);
 		    }
 		}
-
-
-
-/*
-		$("#ws_linkedin").attr("title", 'LinkedIn: ' + linkedin);
-                $(".ws_linkedin").html(': ' + linkedin);
-		if (WebStartup.lastURL.split('.')[1] in {'com':'', 'net':'', 'org':'', 'gov':'', 'edu':''})
-		    var linkedin_url = 'http://www.linkedin.com/company/' + WebStartup.lastURL.split('.')[0];
-		else
-		    var linkedin_url = 'http://www.linkedin.com/company/' + WebStartup.lastURL;
-		$(".ws_linkedin").attr("href", linkedin_url);
-		$(".ws_linkedin").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
-                WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["linkedin"] = linkedin;
-*/
-
-
             }
 	};
         linkedinxmlhttp.open("GET", workingURL, true);
@@ -538,18 +465,16 @@ function crunchbase() {
 		if (funding && round) var slash = '  /  ';
 		else slash = ' ';
 		crunchbase = founded + comma + acquiredby + date + price + ipo + ipodate + funding + slash + round;
-
 		var popups = chrome.extension.getViews({type: "popup"});
 		if (popups.length != 0) {
 		    var popup = popups[0];
 		    popup.ws_crunchbase.setAttribute("title", 'CrunchBase: ' + crunchbase);
-
 		    if (currUrl.split('.')[1] in {'com':'', 'net':'', 'org':'', 'gov':'', 'edu':''}) {
 			popup.ws_crunchbase.childNodes[2].setAttribute('href', 'http://crunchbase.com/company/' + currUrl.split('.')[0]);
 			popup.ws_crunchbase.childNodes[2].insertAdjacentHTML("beforeEnd", "CrunchBase: " + crunchbase);
 		    }
 		    else {
-			popup.ws_crunchbase.childNodes[2].setAttribute('href', "http://crunchbase.com/company/" + currUrl.split('.')[0] + "-" + currUrl.lastURL.split('.')[1]);
+			popup.ws_crunchbase.childNodes[2].setAttribute('href', "http://crunchbase.com/company/" + currUrl.split('.')[0] + "-" + currUrl.split('.')[1]);
 			popup.ws_crunchbase.childNodes[2].insertAdjacentHTML("beforeEnd", "CrunchBase: " + crunchbase);
 		    }
 		}
@@ -559,14 +484,3 @@ function crunchbase() {
         crunchbasexmlhttp.send(null);
     });
 }
-
-
-
-
-function start() {
-
-    alert(crunchbase());
-    
-}
-
-

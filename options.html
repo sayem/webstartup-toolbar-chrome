@@ -49,6 +49,7 @@
 
         $(id).change(function(event) {
           if ($(this).attr('checked')) {
+            localStorage.removeItem(local_id);
             localStorage.setItem(local_id, '1');
           }
           else {
