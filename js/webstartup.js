@@ -1,12 +1,10 @@
 /*
 
-- fix links and also n/a for crunchbase
 - light gray horizontal bar
-- shade/hover
-- options menu
+- shade/hover ---- very light blue hover shade
+- options menu formatting
 
 */
-
 
 
 bg = chrome.extension.getBackgroundPage();
@@ -38,8 +36,9 @@ $(document).ready(function() {
 	bg.yahoobl();
     if (localStorage.getItem('webstartup.linkedin') == '1')
 	bg.linkedin();
-    if (localStorage.getItem('webstartup.crunchbase') == '1')
+    if (localStorage.getItem('webstartup.crunchbase') == '1') {
 	bg.crunchbase();
+    }
 
     $('.ws_pagerank').click(function() {
 	chrome.tabs.create({'url': $(this).attr('href') });

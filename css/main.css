@@ -42,7 +42,6 @@ img { border: 0; }
 body {
     width: 340px;
     background-color: #eaeaea;
-    color: #333333;
     font-size: 1em;
     font-weight: bold;
     font-family: Helvetica, Arial, default;
@@ -61,6 +60,10 @@ img {
     position: relative;
     top: 3px;
     padding-right: 7px;
+}
+
+.ws-text {
+    color: #333333;
 }
 
 a {
