@@ -354,7 +354,7 @@ function linkedin() {
 		    var popup = popups[0];
 		    popup.ws_linkedin.setAttribute('title', 'LinkedIn: ' + linkedin);
 		    if (currUrl.split('.')[1] in {'com':'', 'net':'', 'org':'', 'gov':'', 'edu':''}) {
-			popup.ws_linkedin.childNodes[1].setAttribute('href', 'LinkedIn: ' + currUrl.split('.')[0]);
+			popup.ws_linkedin.childNodes[1].setAttribute('href', "http://linkedin.com/company/" + currUrl.split('.')[0]);
 			popup.ws_linkedin.childNodes[1].insertAdjacentHTML('beforeEnd', "<span class='ws-text'>LinkedIn: </span>" + linkedin);
 		    }
 		    else {

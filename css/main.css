@@ -47,13 +47,13 @@ body {
     font-family: Helvetica, Arial, default;
 }
 
-#webstartup {
-    margin: 12px 10px 15px 9px;
+.ws-tab {
+    padding: 8px 10px 8px 10px;
     line-height: 1.5em;
 }
 
-.ws-tab {
-    margin-bottom: 15px;
+li:hover {
+    background-color: #d5deed;
 }
 
 img {
@@ -66,14 +66,29 @@ img {
     color: #333333;
 }
 
-a {
+a, .ws_pagerank {
     color: #254588;
     text-decoration: none;
 }
 
-
-
 .options {
+    color: #333333;
+    font-size: 1em;
+    font-weight: bold;
+    font-family: Helvetica, Arial, default;
+    margin: 25px 0px 0px 25px;
+}
 
-    padding-left: 20px;
+h1 {
+    font-size: 1.25em;
+    font-style: underline;
+}
+
+.ws_options {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+input {
+    margin-right: 10px;    
 }

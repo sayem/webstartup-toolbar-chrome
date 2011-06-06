@@ -1,11 +1,3 @@
-/*
-
-- light gray horizontal bar
-- shade/hover ---- very light blue hover shade
-- options menu formatting
-
-*/
-
 
 bg = chrome.extension.getBackgroundPage();
 
@@ -40,9 +32,6 @@ $(document).ready(function() {
 	bg.crunchbase();
     }
 
-    $('.ws_pagerank').click(function() {
-	chrome.tabs.create({'url': $(this).attr('href') });
-    });
     $('.ws_alexa').click(function() {
 	chrome.tabs.create({'url': $(this).attr('href') });
     });
