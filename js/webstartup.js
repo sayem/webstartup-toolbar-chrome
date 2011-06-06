@@ -1,3 +1,13 @@
+/*
+
+- fix links and also n/a for crunchbase
+- light gray horizontal bar
+- shade/hover
+- options menu
+
+*/
+
+
 
 bg = chrome.extension.getBackgroundPage();
 
@@ -59,10 +69,3 @@ $(document).ready(function() {
 	chrome.tabs.create({'url': $(this).attr('href') });
     });
 })
-
-
-/*
-
-- format all css/graphics ----> cool borders/background and also highlighting while hovered over, and links
-
-*/

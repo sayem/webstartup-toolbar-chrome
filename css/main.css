@@ -40,20 +40,37 @@ img { border: 0; }
 
 
 body {
-    width: 400px;
+    width: 340px;
+    background-color: #eaeaea;
     color: #333333;
     font-size: 1em;
     font-weight: bold;
-    font-family: "Helvetica Neue",Helvetica,Arial,default;
+    font-family: Helvetica, Arial, default;
+}
+
+#webstartup {
+    margin: 12px 10px 15px 9px;
+    line-height: 1.5em;
 }
 
 .ws-tab {
-    margin-bottom: 10px;
-
+    margin-bottom: 15px;
 }
+
+img {
+    position: relative;
+    top: 3px;
+    padding-right: 7px;
+}
+
+a {
+    color: #254588;
+    text-decoration: none;
+}
+
+
 
 .options {
 
     padding-left: 20px;
-
 }
