@@ -1,62 +1,38 @@
 
 bg = chrome.extension.getBackgroundPage();
-
-
-/*
-if (bg.crunchbase()) {
-
-    
-
-}
-*/
-
-
 bg.crunchbase();
 
 
+$(document).ready(function(){
 
 
 /*
-if (bg.crunchbase()) {
-
-    $("#ws_crunchbase").attr("title", 'CrunchBase: ' + crunchbase);
-    $(".ws_crunchbase").html(': ' + crunchbase);
-
-
-
-
-    if (WebStartup.lastURL.split('.')[1] in {'com':'', 'net':'', 'org':'', 'gov':'', 'edu':''}) 
-	var crunchbase_url = 'http://www.crunchbase.com/company/' + WebStartup.lastURL.split('.')[0];
-    else 
-	var crunchbase_url = 'http://www.crunchbase.com/company/' + WebStartup.lastURL.split('.')[0] + '-' + WebStartup.lastURL.split('.')[1];
-    $(".ws_crunchbase").attr("href", crunchbase_url);
-    $(".ws_crunchbase").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
-    WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["crunchbase"] = crunchbase;
-
-
-}
-else {
-
-
-    $("#ws_crunchbase").attr("title", 'CrunchBase: n/a');
-    $(".ws_crunchbase").html(': n/a');
-
-
-
-}
-
+    $('a').each(function() {
+	var link = $(this).attr('class');
+	link.click(function() {
+	    chrome.tabs.create({'url': link.attr('href') });
+	})
+    });
 */
 
 
+    $('.ws_crunchbase').click(function(){
+	chrome.tabs.create({'url': $(this).attr('href') });
+    });
+
+})
+
+
+
+
 /*
+
 
 - modify popup DOM entirely from background.js ---> then have a start() function that calls all of them in one shot from webstartup.js or just popup.html
 - acct for prefs in background.js by checking local storage for each func ---- then only call those with a 1 value
 - then format all css/graphics ----> cool borders/background and also highlighting while hovered over, and links
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 - http://stackoverflow.com/questions/5306888/chrome-extension-popup-and-background-ajax
 - http://stackoverflow.com/questions/2149917/chrome-extensions-how-to-know-when-a-tab-has-finished-loading-from-the-bg-page so that it doesnt load 2x
@@ -82,9 +58,6 @@ function myFunction(tablink) {
 };
 
 */
-
-
-
 
 
 /*

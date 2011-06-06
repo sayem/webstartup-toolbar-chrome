@@ -404,6 +404,24 @@ function linkedin() {
 		}
 
 
+
+		var popups = chrome.extension.getViews({type: "popup"});
+		if (popups.length != 0) {
+		    var popup = popups[0];
+		    popup.ws_crunchbase.setAttribute("title", 'CrunchBase: ' + crunchbase);
+
+		    if (currUrl.split('.')[1] in {'com':'', 'net':'', 'org':'', 'gov':'', 'edu':''}) {
+			popup.ws_crunchbase.childNodes[2].setAttribute('href', 'http://crunchbase.com/company/' + currUrl.split('.')[0]);
+			popup.ws_crunchbase.childNodes[2].insertAdjacentHTML("beforeEnd", "CrunchBase: " + crunchbase);
+		    }
+		    else {
+			popup.ws_crunchbase.childNodes[2].setAttribute('href', "http://crunchbase.com/company/" + currUrl.split('.')[0] + "-" + currUrl.lastURL.split('.')[1]);
+			popup.ws_crunchbase.childNodes[2].insertAdjacentHTML("beforeEnd", "CrunchBase: " + crunchbase);
+		    }
+		}
+
+
+
 /*
 		$("#ws_linkedin").attr("title", 'LinkedIn: ' + linkedin);
                 $(".ws_linkedin").html(': ' + linkedin);
@@ -415,9 +433,6 @@ function linkedin() {
 		$(".ws_linkedin").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
                 WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["linkedin"] = linkedin;
 */
-
-
-		alert(linkedin);
 
 
             }
@@ -524,37 +539,20 @@ function crunchbase() {
 		else slash = ' ';
 		crunchbase = founded + comma + acquiredby + date + price + ipo + ipodate + funding + slash + round;
 
-
-
-/*
-		$("#ws_crunchbase").attr("title", 'CrunchBase: ' + crunchbase);
-                $(".ws_crunchbase").html(': ' + crunchbase);
-		if (WebStartup.lastURL.split('.')[1] in {'com':'', 'net':'', 'org':'', 'gov':'', 'edu':''}) 
-		    var crunchbase_url = 'http://www.crunchbase.com/company/' + WebStartup.lastURL.split('.')[0];
-		else 
-		    var crunchbase_url = 'http://www.crunchbase.com/company/' + WebStartup.lastURL.split('.')[0] + '-' + WebStartup.lastURL.split('.')[1];
-		$(".ws_crunchbase").attr("href", crunchbase_url);
-		$(".ws_crunchbase").click(function(){ chrome.tabs.create({'url': this.attr("href"); })});
-                WebStartup.wsdata[encodeURIComponent(WebStartup.currUrl)]["crunchbase"] = crunchbase;
-*/
-
-
-
 		var popups = chrome.extension.getViews({type: "popup"});
 		if (popups.length != 0) {
 		    var popup = popups[0];
+		    popup.ws_crunchbase.setAttribute("title", 'CrunchBase: ' + crunchbase);
 
-
-		    alert(popup.ws_crunchbase.innerHTML);
-
-
+		    if (currUrl.split('.')[1] in {'com':'', 'net':'', 'org':'', 'gov':'', 'edu':''}) {
+			popup.ws_crunchbase.childNodes[2].setAttribute('href', 'http://crunchbase.com/company/' + currUrl.split('.')[0]);
+			popup.ws_crunchbase.childNodes[2].insertAdjacentHTML("beforeEnd", "CrunchBase: " + crunchbase);
+		    }
+		    else {
+			popup.ws_crunchbase.childNodes[2].setAttribute('href', "http://crunchbase.com/company/" + currUrl.split('.')[0] + "-" + currUrl.lastURL.split('.')[1]);
+			popup.ws_crunchbase.childNodes[2].insertAdjacentHTML("beforeEnd", "CrunchBase: " + crunchbase);
+		    }
 		}
-
-
-
-
-
-
             }
         };
         crunchbasexmlhttp.open("GET", workingURL, true);
@@ -565,11 +563,10 @@ function crunchbase() {
 
 
 
-
 function start() {
 
     alert(crunchbase());
     
-
 }
+
 
