@@ -1,8 +1,10 @@
 {
   "name": "Web Startup Toolbar",
   "version": "1.0",
-  "description": "Pulls data from CrunchBase (funding/exit details), LinkedIn (employees), Quantcast/Compete (monthly uniques), Alexa (traffic rank), and Google/Bing/Yahoo (backlinks) on the website being viewed",
-  "icons": {"128": "icon.png"},
+  "description": "Pulls data from CrunchBase, LinkedIn, Quantcast, Compete, Alexa, and Google/Bing/Yahoo on any website being viewed",
+  "icons": { "16": "icon16.png",
+             "48": "icon48.png",
+            "128": "icon128.png" },
   "browser_action": {
     "default_icon": "icon.png",
     "default_title": "Web Startup Toolbar",

@@ -12,23 +12,23 @@ $(document).ready(function() {
             $(id).show();
     });
 
-    if (localStorage.getItem('webstartup.pagerank') == '1')
+    if (!(localStorage.getItem('webstartup.pagerank') == '0'))
 	bg.pr();
-    if (localStorage.getItem('webstartup.alexa') == '1')
+    if (!(localStorage.getItem('webstartup.alexa') == '0'))
 	bg.alexa();
-    if (localStorage.getItem('webstartup.compete') == '1')
+    if (!(localStorage.getItem('webstartup.compete') == '0'))
 	bg.compete();
-    if (localStorage.getItem('webstartup.quantcast') == '1')
+    if (!(localStorage.getItem('webstartup.quantcast') == '0'))
 	bg.quantcast();
-    if (localStorage.getItem('webstartup.googlebl') == '1')
+    if (!(localStorage.getItem('webstartup.googlebl') == '0'))
 	bg.googlebl();
-    if (localStorage.getItem('webstartup.bingbl') == '1')
+    if (!(localStorage.getItem('webstartup.bingbl') == '0'))
 	bg.bingbl();
-    if (localStorage.getItem('webstartup.yahoobl') == '1')
+    if (!(localStorage.getItem('webstartup.yahoobl') == '0'))
 	bg.yahoobl();
-    if (localStorage.getItem('webstartup.linkedin') == '1')
+    if (!(localStorage.getItem('webstartup.linkedin') == '0'))
 	bg.linkedin();
-    if (localStorage.getItem('webstartup.crunchbase') == '1') {
+    if (!(localStorage.getItem('webstartup.crunchbase') == '1')) {
 	bg.crunchbase();
     }
 
