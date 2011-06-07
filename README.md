@@ -1,4 +1,7 @@
-Chrome add-on: https://chrome.google.com/webstore/developer/detail/okpokdkgcgblpcmamoodlfodahngodkp/
+Web Startup Toolbar - Google Chrome
+-----------------------------------
+
+https://chrome.google.com/webstore/developer/detail/okpokdkgcgblpcmamoodlfodahngodkp/
 
 A toolbar that automatically pulls data from CrunchBase, LinkedIn, Quantcast, Compete, Alexa, Google, Bing, and Yahoo for any website or startup that you're browsing through.
 
@@ -10,8 +13,6 @@ A toolbar that automatically pulls data from CrunchBase, LinkedIn, Quantcast, Co
 
 *** Need to be logged in to LinkedIn to view additional company details (employees)
 
-
-***
 
 LICENSE
 -------
