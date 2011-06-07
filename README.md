@@ -11,8 +11,10 @@ A toolbar that automatically pulls data from CrunchBase, LinkedIn, Quantcast, Co
 *** Need to be logged in to LinkedIn to view additional company details (employees)
 
 ***
+***
 
 LICENSE
+=======
 
 (The MIT License)
 
