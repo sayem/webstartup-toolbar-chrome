@@ -28,7 +28,7 @@ $(document).ready(function() {
 	bg.yahoobl();
     if (!(localStorage.getItem('webstartup.linkedin') == '0'))
 	bg.linkedin();
-    if (!(localStorage.getItem('webstartup.crunchbase') == '1')) {
+    if (!(localStorage.getItem('webstartup.crunchbase') == '0')) {
 	bg.crunchbase();
     }
 
