@@ -1,7 +1,7 @@
 Web Startup Toolbar - Google Chrome
 -----------------------------------
 
-https://chrome.google.com/webstore/developer/detail/okpokdkgcgblpcmamoodlfodahngodkp/
+https://chrome.google.com/webstore/detail/okpokdkgcgblpcmamoodlfodahngodkp
 
 A toolbar that automatically pulls data from CrunchBase, LinkedIn, Quantcast, Compete, Alexa, Google, Bing, and Yahoo for any website or startup that you're browsing through.
 
