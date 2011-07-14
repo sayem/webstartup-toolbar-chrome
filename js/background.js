@@ -340,13 +340,12 @@ function linkedin() {
 		if (rt.indexOf('<div class="alert error">') != -1) linkedin = 'n/a';
 		else if (rt.indexOf('<p class="member">Already a member?') != -1) linkedin = 'n/a, need to log in to LinkedIn';
 		else {
-		    var start = rt.indexOf('employees-newhires" >');
-		    if (rt.indexOf('Employees (', start) == -1) linkedin = 'n/a';
+		    var start = rt.indexOf('<p class="how-connect">');
+		    if (rt.indexOf('</a> <span class="connect">Employees on LinkedIn', start) == -1) linkedin = 'n/a';
 		    else {
-			start = rt.indexOf('Employees (', start);
-			var end = rt.indexOf(')', start);
-			if (isInt(rt.substr(start + 11, end - start - 11)))
-			    linkedin = rt.substr(start + 11, end - start - 11) + ' employees';
+			var end = rt.indexOf('</a> <span class="connect">Employees on LinkedIn', start);
+			var start = rt.lastIndexOf('>', end);
+			linkedin = rt.substr(start + 1, end - start - 1) + ' employees';
 		    }
 		}
 		var popups = chrome.extension.getViews({type: "popup"});
