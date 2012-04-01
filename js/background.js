@@ -92,7 +92,7 @@ function isInt(num) {
 function pr() {
     chrome.tabs.getSelected(null, function(tab) {
 	var currUrl = getHost(tab.url);
-        workingURL = 'http://toolbarqueries.google.com/search?client=navclient-auto&ch=' + CheckHash(HashURL(currUrl)) + '&features=Rank&q=info:' + encodeURIComponent(currUrl) + '&num=100&filter=0';
+        workingURL = 'http://toolbarqueries.google.com/tbr?client=navclient-auto&ch=' + CheckHash(HashURL(currUrl)) + '&features=Rank&q=info:' + encodeURIComponent(currUrl) + '&num=100&filter=0';
         prxmlhttp = getXmlHttpObject();
         prxmlhttp.onreadystatechange = function () {
             if (prxmlhttp.readyState == 4 && prxmlhttp.status == 200) {
@@ -455,7 +455,7 @@ function crunchbase() {
 			var start = rt.lastIndexOf('<td class="td_left2">');
 			var end = rt.indexOf(' <sup', start);
 			round = rt.substr(start + 21, end - start - 21);
-			if (round.match(/(^(Seed|Angel|Series|Grant|Debt|Unattributed))\s?[A-Z]?,\s((1[0-2]|0?[1-9])\/[0-9][0-9])$/)[0]) round = round.match(/(^(Seed|Angel|Series|Grant|Debt|Unattributed))\s?[A-Z]?,\s((1[0-2]|0?[1-9])\/[0-9][0-9])$/)[0];
+			if (round.match(/(^(Seed|Angel|Series|Grant|Debt|Unattributed|Venture Round))\s?[A-Z]?,\s((1[0-2]|0?[1-9])\/[0-9][0-9])$/)[0]) round = round.match(/(^(Seed|Angel|Series|Grant|Debt|Unattributed|Venture Round))\s?[A-Z]?,\s((1[0-2]|0?[1-9])\/[0-9][0-9])$/)[0];
 			else round = '';
 		    }
 		}
