@@ -120,17 +120,17 @@ function alexa() {
 	workingURL = 'http://xml.alexa.com/data?cli=10&dat=nsa&url=' + encodeURIComponent(currUrl);
 	alexaxmlhttp = getXmlHttpObject();
 	alexaxmlhttp.onreadystatechange = function () {
-            if (alexaxmlhttp.readyState == 4 && alexaxmlhttp.status == 200) {
-		var rt = alexaxmlhttp.responseText;
-		var offset = rt.indexOf('<POPULARITY');
-		var start = rt.indexOf('TEXT="', offset);
-		var end = rt.indexOf('/>', start + 5);
-		var alexa;
-		if (start == -1 || end == -1) alexa = 'n/a';
-		else {
-                    if (isInt(rt.substr(start + 6, end - start - 7))) alexa = addCommas(rt.substr(start + 6, end - start - 7));
-                    else alexa = 'n/a';
-		}
+  if (alexaxmlhttp.readyState == 4 && alexaxmlhttp.status == 200) {
+    var rt = alexaxmlhttp.responseText;
+    var offset = rt.indexOf('<POPULARITY');
+    var start = rt.indexOf('TEXT="', offset);
+    var end = rt.indexOf('"', start + 6);
+    var alexa;
+    if (start == -1 || end == -1) alexa = 'n/a';
+    else {
+      if (isInt(rt.substr(start + 6, end - start - 6))) alexa = addCommas(rt.substr(start + 6, end - start - 6));
+      else alexa = 'n/a';
+    }
 		var popups = chrome.extension.getViews({type: "popup"});
 		if (popups.length != 0) {
 		    var popup = popups[0];
