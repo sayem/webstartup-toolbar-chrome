@@ -267,61 +267,36 @@ function googlebl() {
 
 function bingbl() {
     chrome.tabs.getSelected(null, function(tab) {
-	var currUrl = getHost(tab.url);
+	      var currUrl = getHost(tab.url);
         workingURL = 'http://www.bing.com/search?q=inbody:' + encodeURIComponent(currUrl) + '+-site:' + encodeURIComponent(currUrl);
         bingblxmlhttp = getXmlHttpObject();
         bingblxmlhttp.onreadystatechange = function () {
             if (bingblxmlhttp.readyState == 4 && bingblxmlhttp.status == 200) {
                 var rt = bingblxmlhttp.responseText;
-                var end = rt.indexOf(' results</span>');
-                var start = rt.lastIndexOf('of ', end);
-                var bingbl = '';
-                if (start == -1 || end == -1) bingbl = '0';
-                else {
-                    if (isInt(rt.substr(start + 3, end - start - 3))) bingbl = rt.substr(start + 3, end - start - 3);
-                    else bingbl = 'n/a';
-                }
-		var popups = chrome.extension.getViews({type: "popup"});
-		if (popups.length != 0) {
-		    var popup = popups[0];
-		    popup.ws_bingbl.setAttribute("title", 'Bing Backlinks: ' + bingbl);
-		    popup.ws_bingbl.childNodes[1].setAttribute('href', 'http://bing.com/search?q=inbody:' + currUrl + '+-site:' + currUrl);
-		    popup.ws_bingbl.childNodes[1].insertAdjacentHTML("beforeEnd", "<span class='ws-text'>Bing Backlinks: </span>" + bingbl);
-		}
+                var bingbl='';
+				        var regexpResult1=rt.match(/<span class="sb_count" id="count">(.*) result(|s)<\/span>/i);
+				        var regexpResult2=rt.match(/<span class="sb_count" id="count">(.*) of (.*) result(|s)<\/span>/i);
+				        if(regexpResult1==null && regexpResult2==null)
+					          bingbl='0';
+				        else{
+					          if(regexpResult2)
+						            bingbl = regexpResult2[2];
+					          else
+						            bingbl = regexpResult1[1];
+					          if(!isInt(bingbl))
+						            bingbl='0';
+				        }
+		            var popups = chrome.extension.getViews({type: "popup"});
+		            if (popups.length != 0) {
+		                var popup = popups[0];
+		                popup.ws_bingbl.setAttribute("title", 'Bing Backlinks: ' + bingbl);
+		                popup.ws_bingbl.childNodes[1].setAttribute('href', 'http://bing.com/search?q=inbody:' + currUrl + '+-site:' + currUrl);
+		                popup.ws_bingbl.childNodes[1].insertAdjacentHTML("beforeEnd", "<span class='ws-text'>Bing Backlinks: </span>" + bingbl);
+		            }
             }
         };
         bingblxmlhttp.open("GET", workingURL, true);
         bingblxmlhttp.send(null);
-    });
-}
-
-function yahoobl() {
-    chrome.tabs.getSelected(null, function(tab) {
-	var currUrl = getHost(tab.url);
-        workingURL = 'http://siteexplorer.search.yahoo.com/siteexplorer/search?p=' + encodeURIComponent(currUrl) + '&bwm=i&bwmo=d&bwmf=u';
-        yahooxmlhttp = getXmlHttpObject();
-        yahooxmlhttp.onreadystatechange = function () {
-            if (yahooxmlhttp.readyState == 4 && yahooxmlhttp.status == 200) {
-                var rt = yahooxmlhttp.responseText;
-                var start = rt.indexOf('Inlinks (');
-                var end = rt.indexOf(')', start);
-                var yahooind = '';
-                if (start == -1 || end == -1) yahooind = '0';
-                else {
-                    if (isInt(rt.substr(start + 9, end - start - 9))) yahooind = rt.substr(start + 9, end - start - 9);
-                    else yahooind = 'n/a';
-                }
-		var popups = chrome.extension.getViews({type: "popup"});
-		if (popups.length != 0) {
-		    var popup = popups[0];
-		    popup.ws_yahoobl.setAttribute("title", 'Yahoo Backlinks: ' + yahooind);
-		    popup.ws_yahoobl.childNodes[1].setAttribute('href', 'http://siteexplorer.search.yahoo.com/siteexplorer/search?bwm=i&bwmo=d&bwmf=u&p=' + currUrl);
-		    popup.ws_yahoobl.childNodes[1].insertAdjacentHTML("beforeEnd", "<span class='ws-text'>Yahoo Backlinks: </span>" + yahooind);
-		}
-            }
-        };
-        yahooxmlhttp.open("GET", workingURL, true);
-        yahooxmlhttp.send(null);
     });
 }
 

@@ -24,8 +24,6 @@ $(document).ready(function() {
 	bg.googlebl();
     if (!(localStorage.getItem('webstartup.bingbl') == '0'))
 	bg.bingbl();
-    if (!(localStorage.getItem('webstartup.yahoobl') == '0'))
-	bg.yahoobl();
     if (!(localStorage.getItem('webstartup.linkedin') == '0'))
 	bg.linkedin();
     if (!(localStorage.getItem('webstartup.crunchbase') == '0')) {
@@ -45,9 +43,6 @@ $(document).ready(function() {
 	chrome.tabs.create({'url': $(this).attr('href') });
     });
     $('.ws_bingbl').click(function() {
-	chrome.tabs.create({'url': $(this).attr('href') });
-    });
-    $('.ws_yahoobl').click(function() {
 	chrome.tabs.create({'url': $(this).attr('href') });
     });
     $('.ws_linkedin').click(function() {

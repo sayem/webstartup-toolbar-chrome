@@ -1,7 +1,7 @@
 {
   "name": "Web Startup Toolbar",
-  "version": "1.7",
-  "description": "Pulls data from CrunchBase, LinkedIn, Quantcast, Compete, Alexa, and Google/Bing/Yahoo on any website being viewed",
+  "version": "1.8",
+  "description": "Pulls data from CrunchBase, LinkedIn, Quantcast, Compete, Alexa, Google, and Bing on any website being viewed",
   "icons": { "16": "icon16.png",
              "48": "icon48.png",
             "128": "icon128.png" },
